@@ -100,9 +100,9 @@ Neste projeto você criará uma versão simplificada, sem persistência no banco
 
   - Projeto em grupo;
 
-  - Serão X dias de projeto;
+  - Serão 04 dias de projeto;
 
-  - Data de entrega para avaliação final do projeto: `dd/mm/yyyy - 14:00h
+  - Data de entrega para avaliação final do projeto: `04/11/2021 - 14:00h`
 
 ---
 
@@ -111,7 +111,7 @@ Neste projeto você criará uma versão simplificada, sem persistência no banco
 ### Antes de começar a desenvolver
 
 1. Clone o repositório
-  * `git clone https://github.com/tryber/sd-015-b-project-frontend-online-store.git`
+  * `git clone git@github.com:tryber/sd-015-b-project-frontend-online-store.git`
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-015-b-project-frontend-online-store`
   * Vá para a branch do seu grupo, com `git checkout main-group-XX && git pull`, onde `XX` é o número do seu grupo. Exemplos: `main-group-1`, `main-group-22`.

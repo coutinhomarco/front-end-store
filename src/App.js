@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Cart from './components/Cart';
+import Cart from './pages/Cart';
 import Store from './components/Store';
 
 function App() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Categories({ id, name }) {
+function Categories({ id, name, handleRadioClick }) {
   return (
     <div className="form-check">
       <label className="form-check-label" htmlFor={ id }>
@@ -12,6 +12,7 @@ function Categories({ id, name }) {
           id={ id }
           value={ id }
           data-testid="category"
+          onChange={ () => handleRadioClick(id) }
         />
         { name }
       </label>
@@ -22,6 +23,7 @@ function Categories({ id, name }) {
 Categories.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  handleRadioClick: PropTypes.func.isRequired,
 };
 
 export default Categories;

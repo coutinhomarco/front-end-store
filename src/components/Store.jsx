@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
 import ProductCard from './ProductCard';
@@ -61,20 +64,21 @@ export default class Store extends React.Component {
   createProducts = () => {
     const { productList } = this.state;
     return (
-      <section>
+      <>
         {productList.map((product) => {
           const { title, thumbnail, price, id } = product;
           return (
-            <ProductCard
-              key={ id }
-              title={ title }
-              thumbnail={ thumbnail }
-              price={ price }
-              id={ id }
-            />
+            <Col xs={ 6 } sm={ 4 } md={ 4 } lg={ 3 } xl={ 2 } key={ id } className="mb-4">
+              <ProductCard
+                title={ title }
+                thumbnail={ thumbnail }
+                price={ price }
+                id={ id }
+              />
+            </Col>
           );
         })}
-      </section>
+      </>
     );
   }
 
@@ -121,7 +125,13 @@ export default class Store extends React.Component {
           <i className="fas fa-shopping-cart" />
         </Link>
         {listedCategories}
-        {renderProducts}
+        <section>
+          <Container>
+            <Row>
+              {renderProducts}
+            </Row>
+          </Container>
+        </section>
       </div>
     );
   }

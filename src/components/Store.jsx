@@ -19,6 +19,7 @@ export default class Store extends React.Component {
       categorieId: '',
       query: '',
       productList: [],
+      productsImages: [],
     };
   }
 
@@ -39,7 +40,7 @@ export default class Store extends React.Component {
     const { query, categorieId } = this.state;
     try {
       const products = await getProductsFromCategoryAndQuery(categorieId, query);
-      this.setState({ productList: products.results });
+      this.setState({ productList: products.results }, () => this.getIdFromProducList());
     } catch (error) {
       console.log('Ops!! parece que estou ocupado comprando um Pendrive');
     }
@@ -61,21 +62,44 @@ export default class Store extends React.Component {
     this.fetchProducts();
   }
 
-  createProducts = () => {
+  fetchProductImg = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
+    .then((response) => response.json())
+    .then((product) => product.pictures[0])
+    .then(({ url }) => url)
+    .catch((error) => console.log(error.message))
+
+  getIdFromProducList = async () => {
     const { productList } = this.state;
+    const productsImages = await Promise.all(productList
+      .map((product) => this.fetchProductImg(product.id)));
+    this.setState({ productsImages });
+  }
+
+  createProducts = () => {
+    const { productList, productsImages } = this.state;
     return (
       <>
-        {productList.map((product) => {
-          const { title, thumbnail, price, id } = product;
+        {productList.map((product, i) => {
+          const { title, price, id } = product;
           return (
-            <Col xs={ 6 } sm={ 4 } md={ 4 } lg={ 3 } xl={ 2 } key={ id } className="mb-4">
-              <ProductCard
-                title={ title }
-                thumbnail={ thumbnail }
-                price={ price }
-                id={ id }
-              />
-            </Col>
+            productsImages.length > 0 && (
+              <Col
+                xs={ 6 }
+                sm={ 4 }
+                md={ 4 }
+                lg={ 3 }
+                xl={ 2 }
+                key={ id }
+                className="mb-4"
+              >
+                <ProductCard
+                  title={ title }
+                  thumbnail={ productsImages[i] }
+                  price={ price }
+                  id={ id }
+                />
+              </Col>)
+
           );
         })}
       </>

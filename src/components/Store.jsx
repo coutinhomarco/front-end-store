@@ -78,7 +78,7 @@ export default class Store extends React.Component {
 
   createProducts = () => {
     // Receber productImages no estado
-    const { productList } = this.state;
+    const { productList, categorieId, query } = this.state;
     return (
       <>
         {productList.map((product) => {
@@ -101,6 +101,8 @@ export default class Store extends React.Component {
                 thumbnail={ thumbnail }
                 price={ price }
                 id={ id }
+                categorieId={ categorieId }
+                query={ query }
               />
             </Col>
 

@@ -6,7 +6,10 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 import Categories from './Categories';
 import ProductCard from './ProductCard';
 
@@ -19,6 +22,7 @@ export default class Store extends React.Component {
       categorieId: '',
       query: '',
       productList: [],
+      myCartProductList: [],
       // productsImages: [],
     };
   }
@@ -39,7 +43,10 @@ export default class Store extends React.Component {
   fetchProducts = async () => {
     const { query, categorieId } = this.state;
     try {
-      const products = await getProductsFromCategoryAndQuery(categorieId, query);
+      const products = await getProductsFromCategoryAndQuery(
+        categorieId,
+        query,
+      );
       // Chamar a getIdFromProductList apost setar o estado
       this.setState({ productList: products.results });
     } catch (error) {
@@ -61,7 +68,34 @@ export default class Store extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.fetchProducts();
-  }
+  };
+
+  handleAddToCartClick = (id, title, thumbnail, price) => {
+    const { myCartProductList } = this.state;
+
+    const isProductInCart = myCartProductList.some(
+      (product) => product.id === id,
+    );
+
+    if (!isProductInCart) {
+      this.setState({
+        myCartProductList: [
+          ...myCartProductList,
+          { id, title, thumbnail, price, quantity: 1 },
+        ],
+      });
+    } else {
+      const newProductList = myCartProductList.map((product) => {
+        if (product.id === id) {
+          product.quantity += 1;
+          return product;
+        }
+        return product;
+      });
+
+      this.setState({ myCartProductList: newProductList });
+    }
+  };
 
   // fetchProductImg = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
   //   .then((response) => response.json())
@@ -86,34 +120,26 @@ export default class Store extends React.Component {
           return (
             // ProductImages foi resolvida?
             // productsImages.length > 0 && (
-            <Col
-              xs={ 6 }
-              sm={ 4 }
-              md={ 4 }
-              lg={ 3 }
-              xl={ 2 }
-              key={ id }
-              className="mb-4"
-            >
+            <Col xs={ 6 } sm={ 4 } md={ 4 } lg={ 3 } xl={ 2 } key={ id } className="mb-4">
               <ProductCard
                 title={ title }
                 // Passar a productImages na thumbnail para imagens em hd
                 thumbnail={ thumbnail }
                 price={ price }
                 id={ id }
+                handleAddToCartClick={ this.handleAddToCartClick }
                 categorieId={ categorieId }
                 query={ query }
               />
             </Col>
-
           );
         })}
       </>
     );
-  }
+  };
 
   render() {
-    const { categoriesList } = this.state;
+    const { categoriesList, myCartProductList } = this.state;
     const renderProducts = this.createProducts();
     const listedCategories = categoriesList.map(({ id, name }) => (
       <Categories
@@ -151,15 +177,21 @@ export default class Store extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        <Link data-testid="shopping-cart-button" to="/cart">
+        <Link
+          data-testid="shopping-cart-button"
+          to={ {
+            pathname: '/cart',
+            state: {
+              myCartProductList,
+            },
+          } }
+        >
           <i className="fas fa-shopping-cart" />
         </Link>
         {listedCategories}
         <section>
           <Container>
-            <Row>
-              {renderProducts}
-            </Row>
+            <Row>{renderProducts}</Row>
           </Container>
         </section>
       </div>

@@ -47,7 +47,7 @@ export default class Store extends React.Component {
   };
 
   handleRadioClick = (id) => {
-    this.setState({ categorieId: id });
+    this.setState({ categorieId: id }, () => this.fetchProducts());
   };
 
   handleInputChange = ({ target }) => {

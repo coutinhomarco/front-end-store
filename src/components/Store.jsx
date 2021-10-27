@@ -29,7 +29,14 @@ export default class Store extends React.Component {
 
   componentDidMount() {
     this.fetchCategories();
+    this.getCartList();
   }
+
+  getCartList = () => {
+    const myCartList = JSON.parse(localStorage.getItem('cartProductList'));
+
+    this.setState({ myCartProductList: myCartList || [] });
+  };
 
   fetchCategories = async () => {
     try {
@@ -73,28 +80,30 @@ export default class Store extends React.Component {
   handleAddToCartClick = (id, title, thumbnail, price) => {
     const { myCartProductList } = this.state;
 
-    const isProductInCart = myCartProductList.some(
-      (product) => product.id === id,
-    );
+    let isProductInCart = false;
+    if (myCartProductList.length > 0) {
+      isProductInCart = myCartProductList.some(
+        (product) => product.id === id,
+      );
+    }
 
     if (!isProductInCart) {
-      this.setState({
-        myCartProductList: [
-          ...myCartProductList,
-          { id, title, thumbnail, price, quantity: 1 },
-        ],
-      });
-    } else {
-      const newProductList = myCartProductList.map((product) => {
-        if (product.id === id) {
-          product.quantity += 1;
-          return product;
-        }
-        return product;
-      });
-
-      this.setState({ myCartProductList: newProductList });
+      this.setState(
+        {
+          myCartProductList: [
+            ...myCartProductList,
+            { id, title, thumbnail, price, quantity: 1 },
+          ],
+        },
+        () => this.saveCartLocalStorage(),
+      );
     }
+  };
+
+  saveCartLocalStorage = () => {
+    const { myCartProductList } = this.state;
+
+    localStorage.setItem('cartProductList', JSON.stringify(myCartProductList));
   };
 
   // fetchProductImg = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
@@ -139,7 +148,7 @@ export default class Store extends React.Component {
   };
 
   render() {
-    const { categoriesList, myCartProductList } = this.state;
+    const { categoriesList } = this.state;
     const renderProducts = this.createProducts();
     const listedCategories = categoriesList.map(({ id, name }) => (
       <Categories
@@ -179,12 +188,7 @@ export default class Store extends React.Component {
         </h1>
         <Link
           data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/cart',
-            state: {
-              myCartProductList,
-            },
-          } }
+          to="/cart"
         >
           <i className="fas fa-shopping-cart" />
         </Link>

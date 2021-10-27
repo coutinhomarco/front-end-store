@@ -15,56 +15,97 @@ export default class Product extends Component {
       productTitle: '',
       description: '',
       price: '',
+      myCartProductList: [],
     };
   }
 
   componentDidMount() {
-    this.setProductIdAndCategorie();
+    this.getProductIdAndCategorie();
+    this.getCartList();
   }
 
-  setProductIdAndCategorie = () => {
+  getCartList = () => {
+    const myCartList = JSON.parse(localStorage.getItem('cartProductList'));
+
+    this.setState({ myCartProductList: myCartList || [] });
+  };
+
+  getProductIdAndCategorie = () => {
     const { match } = this.props;
     const { id, categorieId } = match.params;
     let { query } = match.params;
     if (query === 'endpoint') query = '';
-    console.log(categorieId, query);
+
     this.setState({ id, categorieId, query }, () => this.fetchProduct());
-  }
+  };
 
   fetchProduct = async () => {
     const { id, categorieId, query } = this.state;
 
     const products = await getProductsFromCategoryAndQuery(categorieId, query);
-    const filteredProduct = products.results.filter((product) => product.id === id);
+    const filteredProduct = products.results.filter(
+      (product) => product.id === id,
+    );
     const { title, thumbnail, price, condition } = filteredProduct[0];
-    console.log(filteredProduct, title);
+
     this.setState({
       productTitle: title,
       thumbnail,
       price,
       description: condition,
-
     });
-  }
+  };
+
+  handleAddToCartClick = (id, title, thumbnail, price) => {
+    const { myCartProductList } = this.state;
+
+    let isProductInCart = false;
+    if (myCartProductList.length > 0) {
+      isProductInCart = myCartProductList.some(
+        (product) => product.id === id,
+      );
+    }
+
+    if (!isProductInCart) {
+      this.setState(
+        {
+          myCartProductList: [
+            ...myCartProductList,
+            { id, title, thumbnail, price, quantity: 1 },
+          ],
+        },
+        () => this.saveCartLocalStorage(),
+      );
+    }
+  };
+
+  saveCartLocalStorage = () => {
+    const { myCartProductList } = this.state;
+
+    localStorage.setItem('cartProductList', JSON.stringify(myCartProductList));
+  };
 
   render() {
-    const { thumbnail, productTitle, price, description } = this.state;
+    const { thumbnail, productTitle, price, description, id } = this.state;
     return (
       <Card style={ { width: '12rem' } } className="h-100">
         <Card.Img variant="top" src={ thumbnail } />
         <Card.Body>
           <div style={ { height: '5rem' } }>
-            <Card.Text
-              data-testid="product-detail-name"
-            >
-              { productTitle }
+            <Card.Text data-testid="product-detail-name">
+              {productTitle}
             </Card.Text>
-            <Card.Text>
-              { description}
-            </Card.Text>
+            <Card.Text>{description}</Card.Text>
           </div>
-          <Card.Title>{ price }</Card.Title>
-          <Button variant="primary">Adicionar ao carrinho</Button>
+          <Card.Title>{price}</Card.Title>
+          <Button
+            onClick={ () => (
+              this.handleAddToCartClick(id, productTitle, thumbnail, price)
+            ) }
+            variant="primary"
+          >
+            Adicionar ao carrinho
+          </Button>
         </Card.Body>
       </Card>
     );

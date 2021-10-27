@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Cart from './pages/Cart';
-import Store from './components/Store';
-import Product from './components/Product';
+import Store from './pages/Store';
+import Product from './pages/Product';
 
 function App() {
   return (

@@ -67,9 +67,7 @@ export default class Product extends Component {
 
     let isProductInCart = false;
     if (myCartProductList.length > 0) {
-      isProductInCart = myCartProductList.some(
-        (product) => product.id === id,
-      );
+      isProductInCart = myCartProductList.some((product) => product.id === id);
     }
 
     if (!isProductInCart) {
@@ -91,14 +89,25 @@ export default class Product extends Component {
     localStorage.setItem('cartProductList', JSON.stringify(myCartProductList));
   };
 
+  sumProductsQuantity = () => {
+    const { myCartProductList } = this.state;
+    const sum = myCartProductList.reduce((acc, product) => product.quantity + acc, 0);
+
+    return sum;
+  };
+
   render() {
-    const { thumbnail, productTitle, price, description, id } = this.state;
+    const {
+      thumbnail,
+      productTitle,
+      price,
+      description,
+      id,
+    } = this.state;
     return (
       <>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/cart"
-        >
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <div data-testid="shopping-cart-size">{this.sumProductsQuantity()}</div>
           <i className="fas fa-shopping-cart" />
         </Link>
         <Card style={ { width: '12rem' } } className="h-100">

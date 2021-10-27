@@ -97,6 +97,16 @@ export default class Store extends React.Component {
         },
         () => this.saveCartLocalStorage(),
       );
+    } else {
+      const newProductList = myCartProductList.map((product) => {
+        if (product.id === id) {
+          product.quantity += 1;
+          return product;
+        }
+        return product;
+      });
+
+      this.setState({ myCartProductList: newProductList }, this.saveCartLocalStorage());
     }
   };
 
@@ -147,6 +157,13 @@ export default class Store extends React.Component {
     );
   };
 
+  sumProductsQuantity = () => {
+    const { myCartProductList } = this.state;
+    const sum = myCartProductList.reduce((acc, product) => product.quantity + acc, 0);
+
+    return sum;
+  };
+
   render() {
     const { categoriesList } = this.state;
     const renderProducts = this.createProducts();
@@ -190,6 +207,7 @@ export default class Store extends React.Component {
           data-testid="shopping-cart-button"
           to="/cart"
         >
+          <div data-testid="shopping-cart-size">{this.sumProductsQuantity()}</div>
           <i className="fas fa-shopping-cart" />
         </Link>
         {listedCategories}

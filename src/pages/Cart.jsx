@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import CartCard from '../components/CartCard';
 
 export default class Cart extends Component {
@@ -12,16 +11,50 @@ export default class Cart extends Component {
   }
 
   componentDidMount() {
-    this.setMyCartState();
+    this.getCartList();
   }
 
-  setMyCartState = () => {
-    const {
-      location: {
-        state: { myCartProductList },
-      },
-    } = this.props;
-    this.setState({ cartProductList: myCartProductList });
+  getCartList = () => {
+    const myCartList = JSON.parse(localStorage.getItem('cartProductList'));
+
+    this.setState({ cartProductList: myCartList || [] });
+  };
+
+  handleAddToCartClick = (id, title, thumbnail, price) => {
+    const { cartProductList } = this.state;
+
+    const isProductInCart = cartProductList.some(
+      (product) => product.id === id,
+    );
+
+    if (!isProductInCart) {
+      this.setState(
+        {
+          cartProductList: [
+            ...cartProductList,
+            { id, title, thumbnail, price, quantity: 1 },
+          ],
+        },
+        () => this.saveCartLocalStorage(),
+      );
+    } else {
+      const newProductList = cartProductList.map((product) => {
+        if (product.id === id) {
+          product.quantity += 1;
+          return product;
+        }
+        return product;
+      });
+
+      this.setState({ cartProductList: newProductList },
+        () => this.saveCartLocalStorage());
+    }
+  };
+
+  saveCartLocalStorage = () => {
+    const { cartProductList } = this.state;
+
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   };
 
   render() {
@@ -48,27 +81,3 @@ export default class Cart extends Component {
     );
   }
 }
-
-Cart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      myCartProductList: PropTypes.arrayOf(PropTypes.object),
-    }),
-  }),
-  myCartProductList: PropTypes.arrayOf(PropTypes.object),
-  state: PropTypes.shape({
-    myCartProductList: PropTypes.arrayOf(PropTypes.object),
-  }),
-};
-
-Cart.defaultProps = {
-  location: {
-    state: {
-      myCartProductList: [{}],
-    },
-  },
-  myCartProductList: [{}],
-  state: PropTypes.shape({
-    myCartProductList: [{}],
-  }),
-};

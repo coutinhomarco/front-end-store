@@ -27,6 +27,7 @@ export default class Cart extends Component {
       if (product.id === id) {
         if (type === '+')product.quantity += 1;
         if (type === '-' && product.quantity > 0)product.quantity -= 1;
+        if (type === 'x') product.quantity = 0;
         return product;
       }
       return product;

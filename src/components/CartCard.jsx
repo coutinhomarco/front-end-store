@@ -35,7 +35,12 @@ function CartCard(props) {
             <i className="fas fa-plus" />
 
           </Button>
-          <Button><i className="fas fa-times" /></Button>
+          <Button
+            onClick={ () => increaseOrDecresaseProductQuantity(id, 'x') }
+          >
+            <i className="fas fa-times" />
+
+          </Button>
           <Card.Title
             data-testid="shopping-cart-product-quantity"
           >

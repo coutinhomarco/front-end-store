@@ -20,35 +20,21 @@ export default class Cart extends Component {
     this.setState({ cartProductList: myCartList || [] });
   };
 
-  handleAddToCartClick = (id, title, thumbnail, price) => {
+  increaseOrDecresaseProductQuantity = (id, type) => {
     const { cartProductList } = this.state;
 
-    const isProductInCart = cartProductList.some(
-      (product) => product.id === id,
-    );
-
-    if (!isProductInCart) {
-      this.setState(
-        {
-          cartProductList: [
-            ...cartProductList,
-            { id, title, thumbnail, price, quantity: 1 },
-          ],
-        },
-        () => this.saveCartLocalStorage(),
-      );
-    } else {
-      const newProductList = cartProductList.map((product) => {
-        if (product.id === id) {
-          product.quantity += 1;
-          return product;
-        }
+    const newProductList = cartProductList.map((product) => {
+      if (product.id === id) {
+        if (type === '+')product.quantity += 1;
+        if (type === '-' && product.quantity > 0)product.quantity -= 1;
+        if (type === 'x') product.quantity = 0;
         return product;
-      });
+      }
+      return product;
+    });
 
-      this.setState({ cartProductList: newProductList },
-        () => this.saveCartLocalStorage());
-    }
+    this.setState({ cartProductList: newProductList },
+      () => this.saveCartLocalStorage());
   };
 
   saveCartLocalStorage = () => {
@@ -66,6 +52,8 @@ export default class Cart extends Component {
         thumbnail={ product.thumbnail }
         price={ product.price }
         quantity={ product.quantity }
+        increaseOrDecresaseProductQuantity={ this.increaseOrDecresaseProductQuantity }
+        id={ product.id }
       />
     ));
     return (

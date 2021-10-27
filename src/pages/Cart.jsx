@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import CartCard from '../components/CartCard';
 
 export default class Cart extends Component {
@@ -65,6 +67,9 @@ export default class Cart extends Component {
             Seu carrinho está vazio
           </p>
         )}
+        <Link to="/cart/checkout">
+          <Button data-testid="checkout-products">Finalizar</Button>
+        </Link>
       </div>
     );
   }

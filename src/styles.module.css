@@ -9,7 +9,3 @@
 .product-quantity-container {
   display: flex;
 }
-
-.product-quantity {
-  display: inline-block;
-}

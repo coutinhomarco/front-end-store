@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import FormReview from '../components/FormReview';
 
 export default class Product extends Component {
   constructor() {
@@ -23,6 +24,10 @@ export default class Product extends Component {
   componentDidMount() {
     this.getProductIdAndCategorie();
     this.getCartList();
+  }
+
+  handleButtonSubmit(event) {
+    event.preventDefault();
   }
 
   getCartList = () => {
@@ -117,6 +122,9 @@ export default class Product extends Component {
             </Button>
           </Card.Body>
         </Card>
+        <section>
+          <FormReview handleButtonSubmit={ this.handleButtonSubmit } />
+        </section>
       </>
     );
   }

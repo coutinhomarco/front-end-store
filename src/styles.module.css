@@ -5,3 +5,11 @@
   text-overflow: ellipsis;
   word-wrap: break-word;
 }
+
+.product-quantity-container {
+  display: flex;
+}
+
+.product-quantity {
+  display: inline-block;
+}

@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import FormReview from '../components/FormReview';
 
 export default class Product extends Component {
   constructor() {
@@ -22,6 +24,10 @@ export default class Product extends Component {
   componentDidMount() {
     this.getProductIdAndCategorie();
     this.getCartList();
+  }
+
+  handleButtonSubmit(event) {
+    event.preventDefault();
   }
 
   getCartList = () => {
@@ -88,26 +94,38 @@ export default class Product extends Component {
   render() {
     const { thumbnail, productTitle, price, description, id } = this.state;
     return (
-      <Card style={ { width: '12rem' } } className="h-100">
-        <Card.Img variant="top" src={ thumbnail } />
-        <Card.Body>
-          <div style={ { height: '5rem' } }>
-            <Card.Text data-testid="product-detail-name">
-              {productTitle}
-            </Card.Text>
-            <Card.Text>{description}</Card.Text>
-          </div>
-          <Card.Title>{price}</Card.Title>
-          <Button
-            onClick={ () => (
-              this.handleAddToCartClick(id, productTitle, thumbnail, price)
-            ) }
-            variant="primary"
-          >
-            Adicionar ao carrinho
-          </Button>
-        </Card.Body>
-      </Card>
+      <>
+        <Link
+          data-testid="shopping-cart-button"
+          to="/cart"
+        >
+          <i className="fas fa-shopping-cart" />
+        </Link>
+        <Card style={ { width: '12rem' } } className="h-100">
+          <Card.Img variant="top" src={ thumbnail } />
+          <Card.Body>
+            <div style={ { height: '5rem' } }>
+              <Card.Text data-testid="product-detail-name">
+                {productTitle}
+              </Card.Text>
+              <Card.Text>{description}</Card.Text>
+            </div>
+            <Card.Title>{price}</Card.Title>
+            <Button
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => (
+                this.handleAddToCartClick(id, productTitle, thumbnail, price)
+              ) }
+              variant="primary"
+            >
+              Adicionar ao carrinho
+            </Button>
+          </Card.Body>
+        </Card>
+        <section>
+          <FormReview handleButtonSubmit={ this.handleButtonSubmit } />
+        </section>
+      </>
     );
   }
 }

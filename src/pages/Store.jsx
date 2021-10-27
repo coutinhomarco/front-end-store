@@ -10,8 +10,8 @@ import {
   getCategories,
   getProductsFromCategoryAndQuery,
 } from '../services/api';
-import Categories from './Categories';
-import ProductCard from './ProductCard';
+import Categories from '../components/Categories';
+import ProductCard from '../components/ProductCard';
 
 export default class Store extends React.Component {
   constructor(props) {

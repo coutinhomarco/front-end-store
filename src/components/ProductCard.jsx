@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from '../styles.module.css';
+import image from './image.png';
 
 function ProductCard({
   title,
@@ -13,6 +14,7 @@ function ProductCard({
   handleAddToCartClick,
   categorieId,
   query,
+  shipping,
 }) {
   return (
 
@@ -22,6 +24,13 @@ function ProductCard({
         to={ `/product/${categorieId}/${id}/${query || 'endpoint'}` }
       >
         <Card.Img variant="top" src={ thumbnail } />
+        {
+          shipping.free_shipping && (<Card.Img
+            data-testid="free-shipping"
+            variant="top"
+            src={ image }
+          />)
+        }
       </Link>
       <Card.Body>
         <div style={ { height: '5rem' } }>
@@ -41,13 +50,16 @@ function ProductCard({
 }
 
 ProductCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  categorieId: PropTypes.string.isRequired,
+  handleAddToCartClick: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  handleAddToCartClick: PropTypes.func.isRequired,
-  categorieId: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired,
+  shipping: PropTypes.shape({
+    free_shipping: PropTypes.bool,
+  }).isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default ProductCard;

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import FormReview from '../components/FormReview';
 
-export default class Product extends Component {
+export default class ProductDetails extends Component {
   constructor() {
     super();
     this.state = {
@@ -139,7 +139,7 @@ export default class Product extends Component {
   }
 }
 
-Product.propTypes = {
+ProductDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

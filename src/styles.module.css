@@ -9,3 +9,8 @@
 .product-quantity-container {
   display: flex;
 }
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -18,7 +18,6 @@ function ProductCard({
   availableQuantity,
 }) {
   return (
-
     <Card style={ { width: '12rem' } } data-testid="product" className="h-100">
       <Link
         data-testid="product-detail-link"
@@ -61,8 +60,11 @@ ProductCard.propTypes = {
   shipping: PropTypes.shape({
     free_shipping: PropTypes.bool,
   }).isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 
+ProductCard.defaultProps = {
+  thumbnail: '',
+};
 export default ProductCard;

@@ -6,7 +6,8 @@ import styles from '../styles.module.css';
 
 function CartCard(props) {
   const { title, thumbnail, price,
-    quantity, increaseOrDecresaseProductQuantity, id } = props;
+    quantity,
+    increaseOrDecresaseProductQuantity, id, disabled } = props;
   return (
     <Card style={ { width: '12rem' } } className="h-100">
       <Card.Img variant="top" src={ thumbnail } />
@@ -29,8 +30,10 @@ function CartCard(props) {
 
           </Button>
           <Button
-            onClick={ () => increaseOrDecresaseProductQuantity(id, '+') }
+            onClick={ () => (
+              increaseOrDecresaseProductQuantity(id, '+')) }
             data-testid="product-increase-quantity"
+            disabled={ disabled }
           >
             <i className="fas fa-plus" />
 
@@ -54,6 +57,7 @@ function CartCard(props) {
 }
 
 CartCard.propTypes = {
+  disabled: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   increaseOrDecresaseProductQuantity: PropTypes.func.isRequired,
   price: PropTypes.number.isRequired,

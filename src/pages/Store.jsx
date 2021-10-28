@@ -135,7 +135,8 @@ export default class Store extends React.Component {
     return (
       <>
         {productList.map((product) => {
-          const { title, price, id, thumbnail } = product;
+          console.log(product);
+          const { title, price, id, thumbnail, shipping } = product;
           return (
             // ProductImages foi resolvida?
             // productsImages.length > 0 && (
@@ -149,6 +150,7 @@ export default class Store extends React.Component {
                 handleAddToCartClick={ this.handleAddToCartClick }
                 categorieId={ categorieId }
                 query={ query }
+                shipping={ shipping }
               />
             </Col>
           );

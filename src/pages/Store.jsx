@@ -77,7 +77,8 @@ export default class Store extends React.Component {
     this.fetchProducts();
   };
 
-  handleAddToCartClick = (id, title, thumbnail, price) => {
+  handleAddToCartClick = (productInfo) => {
+    const { id, title, thumbnail, price, availableQuantity } = productInfo;
     const { myCartProductList } = this.state;
 
     let isProductInCart = false;
@@ -92,7 +93,7 @@ export default class Store extends React.Component {
         {
           myCartProductList: [
             ...myCartProductList,
-            { id, title, thumbnail, price, quantity: 1 },
+            { id, title, thumbnail, price, quantity: 1, availableQuantity },
           ],
         },
         () => this.saveCartLocalStorage(),
@@ -135,8 +136,10 @@ export default class Store extends React.Component {
     return (
       <>
         {productList.map((product) => {
-          console.log(product);
-          const { title, price, id, thumbnail, shipping } = product;
+          const {
+            title,
+            price,
+            id, thumbnail, shipping, available_quantity: availableQuantity } = product;
           return (
             // ProductImages foi resolvida?
             // productsImages.length > 0 && (
@@ -151,6 +154,7 @@ export default class Store extends React.Component {
                 categorieId={ categorieId }
                 query={ query }
                 shipping={ shipping }
+                availableQuantity={ availableQuantity }
               />
             </Col>
           );

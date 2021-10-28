@@ -15,6 +15,7 @@ function ProductCard({
   categorieId,
   query,
   shipping,
+  availableQuantity,
 }) {
   return (
 
@@ -40,7 +41,8 @@ function ProductCard({
         <Button
           data-testid="product-add-to-cart"
           variant="primary"
-          onClick={ () => handleAddToCartClick(id, title, thumbnail, price) }
+          onClick={ () => handleAddToCartClick({
+            id, title, thumbnail, price, availableQuantity }) }
         >
           Adicionar ao carrinho
         </Button>
@@ -50,6 +52,7 @@ function ProductCard({
 }
 
 ProductCard.propTypes = {
+  availableQuantity: PropTypes.number.isRequired,
   categorieId: PropTypes.string.isRequired,
   handleAddToCartClick: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,

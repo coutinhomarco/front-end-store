@@ -26,12 +26,12 @@ export default class Cart extends Component {
   increaseOrDecresaseProductQuantity = (id, type) => {
     const { cartProductList } = this.state;
     const newProductList = cartProductList.map((product) => {
-      if (product.quantity >= product.availableQuantity) {
+      if (product.quantity >= product.availableQuantity - 1) {
         this.setState({
           disabled: true,
         });
       }
-      if (product.id === id) {
+      if (product.id === id && product.quantity <= product.availableQuantity) {
         if (type === '+' && product.quantity < product.availableQuantity) {
           product.quantity += 1;
         }

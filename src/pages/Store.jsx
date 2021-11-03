@@ -23,7 +23,7 @@ export default class Store extends React.Component {
       query: '',
       productList: [],
       myCartProductList: [],
-      // productsImages: [],
+      productsImages: [],
     };
   }
 
@@ -55,7 +55,7 @@ export default class Store extends React.Component {
         query,
       );
       // Chamar a getIdFromProductList apost setar o estado
-      this.setState({ productList: products.results });
+      this.setState({ productList: products.results }, () => this.getIdFromProducList());
     } catch (error) {
       console.log('Ops!! parece que estou ocupado comprando um Pendrive');
     }
@@ -117,37 +117,36 @@ export default class Store extends React.Component {
     localStorage.setItem('cartProductList', JSON.stringify(myCartProductList));
   };
 
-  // fetchProductImg = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
-  //   .then((response) => response.json())
-  //   .then((product) => product.pictures[0])
-  //   .then(({ url }) => url)
-  //   .catch((error) => console.log(error.message))
+  fetchProductImg = (id) => fetch(`https://api.mercadolibre.com/items/${id}`)
+    .then((response) => response.json())
+    .then((product) => product.pictures[0])
+    .then(({ url }) => url)
+    .catch((error) => console.log(error.message))
 
-  // getIdFromProducList = async () => {
-  //   const { productList } = this.state;
-  //   const productsImages = await Promise.all(productList
-  //     .map((product) => this.fetchProductImg(product.id)));
-  //   this.setState({ productsImages });
-  // }
+  getIdFromProducList = async () => {
+    const { productList } = this.state;
+    const productsImages = await Promise.all(productList
+      .map((product) => this.fetchProductImg(product.id)));
+    this.setState({ productsImages });
+  }
 
   createProducts = () => {
     // Receber productImages no estado
-    const { productList, categorieId, query } = this.state;
+    const { productList, categorieId, query, productsImages } = this.state;
     return (
       <>
-        {productList.map((product) => {
+        {productList.map((product, i) => {
           const {
             title,
             price,
-            id, thumbnail, shipping, available_quantity: availableQuantity } = product;
+            id, shipping, available_quantity: availableQuantity } = product;
           return (
             // ProductImages foi resolvida?
-            // productsImages.length > 0 && (
             <Col xs={ 6 } sm={ 4 } md={ 4 } lg={ 3 } xl={ 2 } key={ id } className="mb-4">
               <ProductCard
                 title={ title }
                 // Passar a productImages na thumbnail para imagens em hd
-                thumbnail={ thumbnail }
+                thumbnail={ productsImages[i] }
                 price={ price }
                 id={ id }
                 handleAddToCartClick={ this.handleAddToCartClick }

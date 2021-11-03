@@ -180,23 +180,22 @@ export default class Store extends React.Component {
         handleRadioClick={ this.handleRadioClick }
       />
     ));
-
     return (
       <div>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
         <header>
+          <h1 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h1>
           <Form onSubmit={ this.handleSubmit }>
             <FloatingLabel
               controlId="floatingInput"
-              label="Pesquisar..."
+              label="Quero um..."
               className="mb-3"
             >
               <Form.Control
                 data-testid="query-input"
                 type="text"
-                placeholder="Pesquisar..."
+                placeholder="Quero um..."
                 onChange={ this.handleInputChange }
               />
             </FloatingLabel>
@@ -208,15 +207,22 @@ export default class Store extends React.Component {
             />
           </Form>
         </header>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/cart"
-        >
-          <div data-testid="shopping-cart-size">{this.sumProductsQuantity()}</div>
-          <i className="fas fa-shopping-cart" />
-        </Link>
         <main>
           <div className="listedCategories">
+            <Link
+              id="shopping-cart"
+              data-testid="shopping-cart-button"
+              to="/cart"
+            >
+              <div
+                id="shopping-cart-size"
+                data-testid="shopping-cart-size"
+              >
+                {this.sumProductsQuantity()}
+
+              </div>
+              <i className="fas fa-shopping-cart" />
+            </Link>
             {listedCategories}
           </div>
           <section>

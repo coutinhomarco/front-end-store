@@ -18,25 +18,32 @@ function ProductCard({
   availableQuantity,
 }) {
   return (
-    <Card style={ { width: '12rem' } } data-testid="product" className="h-100">
+    <Card style={ { width: '12rem' } } data-testid="product" className="h-100 boxshadow">
       <Link
         data-testid="product-detail-link"
         to={ `/product/${categorieId}/${id}/${query || 'endpoint'}` }
       >
         <Card.Img variant="top" src={ thumbnail } />
-        {
-          shipping.free_shipping && (<Card.Img
-            data-testid="free-shipping"
-            variant="top"
-            src={ image }
-          />)
-        }
       </Link>
       <Card.Body>
         <div style={ { height: '5rem' } }>
           <Card.Text className={ styles.productTitle }>{title}</Card.Text>
         </div>
-        <Card.Title>{price}</Card.Title>
+        <div className="shipping-price">
+          <Card.Title>
+            R$
+            {price}
+          </Card.Title>
+          {
+            shipping.free_shipping && (<Card.Img
+              style={ { width: '50px', height: '40px' } }
+              id="shippingcart"
+              data-testid="free-shipping"
+              variant="top"
+              src={ image }
+            />)
+          }
+        </div>
         <Button
           data-testid="product-add-to-cart"
           variant="primary"

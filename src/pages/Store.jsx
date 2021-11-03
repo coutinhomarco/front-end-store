@@ -184,6 +184,9 @@ export default class Store extends React.Component {
 
     return (
       <div>
+        <h1 data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h1>
         <header>
           <Form onSubmit={ this.handleSubmit }>
             <FloatingLabel
@@ -206,9 +209,6 @@ export default class Store extends React.Component {
             />
           </Form>
         </header>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
         <Link
           data-testid="shopping-cart-button"
           to="/cart"
@@ -216,12 +216,16 @@ export default class Store extends React.Component {
           <div data-testid="shopping-cart-size">{this.sumProductsQuantity()}</div>
           <i className="fas fa-shopping-cart" />
         </Link>
-        {listedCategories}
-        <section>
-          <Container>
-            <Row>{renderProducts}</Row>
-          </Container>
-        </section>
+        <main>
+          <div className="listedCategories">
+            {listedCategories}
+          </div>
+          <section>
+            <Container>
+              <Row>{renderProducts}</Row>
+            </Container>
+          </section>
+        </main>
       </div>
     );
   }

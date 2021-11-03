@@ -1,1 +1,24 @@
-/* Será preenchido */
+h1 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-top: 30px;
+}
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+main {
+  display: flex;
+}
+
+#floatingInput {
+  width: 600px;
+}
+
+.form-check {
+  width: max-content;
+}

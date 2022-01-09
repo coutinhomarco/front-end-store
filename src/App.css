@@ -128,8 +128,18 @@ section {
   width: fit-content;
 }
 
+#checkout-title{
+  font-size: 0.9em;
+  text-align: center;
+  margin-top:30px
+}
+
 #shippingcart {
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+#checkout-btn{
+  margin-top:15px
 }

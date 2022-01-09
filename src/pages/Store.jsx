@@ -142,7 +142,18 @@ export default class Store extends React.Component {
             id, shipping, available_quantity: availableQuantity } = product;
           return (
             // ProductImages foi resolvida?
-            <Col xs={ 6 } sm={ 4 } md={ 4 } lg={ 3 } xl={ 2 } key={ id } className="mb-4">
+            <Col
+              style={
+                { maxWidth: '10rem' }
+              }
+              xs={ 6 }
+              sm={ 4 }
+              md={ 4 }
+              lg={ 3 }
+              xl={ 2 }
+              key={ id }
+              className="mb-4"
+            >
               <ProductCard
                 title={ title }
                 // Passar a productImages na thumbnail para imagens em hd

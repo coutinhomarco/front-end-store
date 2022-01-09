@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from '../styles.module.css';
-import image from './image.png';
+import image from './free.png';
 
 function ProductCard({
   title,
@@ -18,7 +18,13 @@ function ProductCard({
   availableQuantity,
 }) {
   return (
-    <Card style={ { width: '12rem' } } data-testid="product" className="h-100 boxshadow">
+    <Card
+      style={
+        { width: '9.1rem' }
+      }
+      data-testid="product"
+      className="h-100 boxshadow"
+    >
       <Link
         data-testid="product-detail-link"
         to={ `/product/${categorieId}/${id}/${query || 'endpoint'}` }
@@ -26,17 +32,21 @@ function ProductCard({
         <Card.Img variant="top" src={ thumbnail } />
       </Link>
       <Card.Body>
-        <div style={ { height: '5rem' } }>
+        <div style={ { height: '5rem', fontSize: '14px' } }>
           <Card.Text className={ styles.productTitle }>{title}</Card.Text>
         </div>
         <div className="shipping-price">
-          <Card.Title>
+          <Card.Title
+            style={
+              { fontSize: '16px' }
+            }
+          >
             R$
             {price}
           </Card.Title>
           {
             shipping.free_shipping && (<Card.Img
-              style={ { width: '50px', height: '40px' } }
+              style={ { width: '65px', height: '45px' } }
               id="shippingcart"
               data-testid="free-shipping"
               variant="top"
@@ -45,6 +55,9 @@ function ProductCard({
           }
         </div>
         <Button
+          style={
+            { width: '7rem', height: '2.7rem', fontSize: '14px' }
+          }
           data-testid="product-add-to-cart"
           variant="primary"
           onClick={ () => handleAddToCartClick({

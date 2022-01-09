@@ -3,12 +3,6 @@ body {
   color: #303030;
 }
 
-h1 {
-  font-size: 1.3em;
-  font-weight: 600;
-  /* margin-top: 30px; */
-  text-align: center;
-}
 form {
   align-items: center;
   display: flex;
@@ -17,11 +11,28 @@ form {
   margin-top: 15px;
 }
 
+header {
+  background-color: #303030;
+  color: antiquewhite;
+  padding: 3%;
+}
+
+header h1 {
+  font-size: 1.6em;
+}
+
 main {
   display: flex;
 }
 
-header {
+h1 {
+  font-size: 1.3em;
+  font-weight: 600;
+  /* margin-top: 30px; */
+  text-align: center;
+}
+
+section {
   /* background-color: #dbd8d8; */
   padding-top: 30px;
   padding-bottom: 8px;
@@ -36,7 +47,8 @@ header {
   background-color: #d3d3d3;
   border-radius: 4px;
   color: rgb(30, 30, 30);
-  font-weight: 500;
+  font-weight: 400;
+  font-size:15px;
   height: min-content;
   margin-right: 10px;
   padding: 1%;
@@ -80,5 +92,7 @@ header {
 }
 
 #shippingcart {
-  justify-self: flex-end;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }

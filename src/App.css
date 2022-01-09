@@ -62,7 +62,7 @@ section {
 }
 
 .card-img-top {
-  height: 170px;
+  height: 184px;
 }
 
 .boxshadow {
@@ -73,6 +73,43 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.cart-container p{
+  max-width: fit-content;
+}
+
+.cart-container a{
+  display: flex;
+  align-items: center;
+}
+
+.cart-container h3{
+  font-size:1.2em;
+  margin: 15px;
+}
+
+#cart-section{
+  display: flex;
+}
+
+#teste{
+  margin-top: 20px;
+}
+
+#cart-title{
+  margin: 15px 0;
+  text-align: center;
+}
+
+#cart-button{
+  margin: auto;
 }
 
 #floatingInput {

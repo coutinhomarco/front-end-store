@@ -73,16 +73,19 @@ export default class Cart extends Component {
       />
     ));
     return (
-      <div>
-        {cartProductList.length > 0 ? (
-          myCartProducts
-        ) : (
-          <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
-        )}
+      <div className="cart-container">
+        <h3>Seu carrinho:</h3>
+        <section id="cart-section">
+          {cartProductList.length > 0 ? (
+            myCartProducts
+          ) : (
+            <p data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio
+            </p>
+          )}
+        </section>
         <Link to="/cart/checkout">
-          <Button data-testid="checkout-products">Finalizar</Button>
+          <Button id="cart-button" data-testid="checkout-products">Finalizar</Button>
         </Link>
       </div>
     );

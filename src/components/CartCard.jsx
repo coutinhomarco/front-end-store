@@ -9,7 +9,7 @@ function CartCard(props) {
     quantity,
     increaseOrDecresaseProductQuantity, id, disabled } = props;
   return (
-    <Card style={ { width: '12rem' } } className="h-100">
+    <Card style={ { width: '12rem', marginLeft: '10px' } } className="h-100">
       <Card.Img variant="top" src={ thumbnail } />
       <Card.Body>
         <div style={ { height: '5rem' } }>
@@ -20,7 +20,7 @@ function CartCard(props) {
             {title}
           </Card.Text>
         </div>
-        <Card.Title>{price}</Card.Title>
+        <Card.Title id="cart-title">{`R$${price}`}</Card.Title>
         <div className="product-quantity-container">
           <Button
             onClick={ () => increaseOrDecresaseProductQuantity(id, '-') }
@@ -45,9 +45,10 @@ function CartCard(props) {
 
           </Button>
           <Card.Title
+            id="teste"
             data-testid="shopping-cart-product-quantity"
           >
-            {quantity}
+            {`unidades: ${quantity}`}
 
           </Card.Title>
         </div>

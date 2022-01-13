@@ -1,5 +1,5 @@
 <h1>Front End Online Store</h1>
-<hr>
+
 
 Projeto feito em grupo durante curso de Desenvolvimento de Software da <a href="https://www.betrybe.com/" target="_blank" >Trybe</a> no módulo de Front End
 <hr>

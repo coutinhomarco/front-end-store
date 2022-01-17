@@ -19,6 +19,7 @@ function ProductCard({
 }) {
   return (
     <Card
+      style={ { width: '250px', height: '5rem', fontSize: '14px', flexBasis: '20%' } }
       id="product-card"
       data-testid="product"
       className="h-100 boxshadow"
@@ -30,7 +31,7 @@ function ProductCard({
         <Card.Img variant="top" src={ thumbnail } />
       </Link>
       <Card.Body>
-        <div style={ { height: '5rem', fontSize: '14px' } }>
+        <div style={ { height: '5rem', fontSize: '15px' } }>
           <Card.Text className={ styles.productTitle }>{title}</Card.Text>
         </div>
         <div className="shipping-price">
@@ -54,7 +55,7 @@ function ProductCard({
         </div>
         <Button
           style={
-            { width: '7rem', height: '2.7rem', fontSize: '14px' }
+            { width: '100%', height: '50px', fontSize: '14px' }
           }
           data-testid="product-add-to-cart"
           variant="primary"

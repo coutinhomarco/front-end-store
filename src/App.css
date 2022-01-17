@@ -24,8 +24,8 @@
   .row{
     max-width:400px !important;
   }
-  .product-card{
-    width: 200px;
+  #product-card{
+    width: 100%;
     flex-basis: 100%;
   }
 }
@@ -93,8 +93,8 @@ section {
   justify-content: space-around;
 }
 
-.product-card{
-  width: 10rem
+#product-card{
+  width: 150px;
 }
 
 .card-img-top {

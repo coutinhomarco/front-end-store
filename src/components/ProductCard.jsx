@@ -19,9 +19,7 @@ function ProductCard({
 }) {
   return (
     <Card
-      style={
-        { width: '9.3rem' }
-      }
+      id="product-card"
       data-testid="product"
       className="h-100 boxshadow"
     >

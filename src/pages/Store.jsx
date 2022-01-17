@@ -141,7 +141,6 @@ export default class Store extends React.Component {
             price,
             id, shipping, available_quantity: availableQuantity } = product;
           return (
-            // ProductImages foi resolvida?
             <Col
               style={
                 { maxWidth: '10rem' }
@@ -156,7 +155,6 @@ export default class Store extends React.Component {
             >
               <ProductCard
                 title={ title }
-                // Passar a productImages na thumbnail para imagens em hd
                 thumbnail={ productsImages[i] }
                 price={ price }
                 id={ id }
@@ -194,11 +192,12 @@ export default class Store extends React.Component {
     return (
       <div>
         <header>
-          <h1 data-testid="home-initial-message">
+          <h1 id="header-h1" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
           <Form onSubmit={ this.handleSubmit }>
             <FloatingLabel
+              id="search-bar"
               controlId="floatingInput"
               label="Quero um..."
               className="mb-3"

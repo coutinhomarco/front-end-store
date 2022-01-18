@@ -131,7 +131,6 @@ export default class Store extends React.Component {
   }
 
   createProducts = () => {
-    // Receber productImages no estado
     const { productList, categorieId, query, productsImages } = this.state;
     return (
       <>
@@ -143,7 +142,7 @@ export default class Store extends React.Component {
           return (
             <Col
               style={
-                { minWidth: '300px', maxWidth: '800px' }
+                { minWidth: '300px' }
               }
               xs={ 6 }
               sm={ 4 }
@@ -174,7 +173,6 @@ export default class Store extends React.Component {
   sumProductsQuantity = () => {
     const { myCartProductList } = this.state;
     const sum = myCartProductList.reduce((acc, product) => product.quantity + acc, 0);
-
     return sum;
   };
 
@@ -236,7 +234,11 @@ export default class Store extends React.Component {
             {listedCategories}
           </div>
           <section>
-            <Container>
+            <Container
+              style={
+                { maxWidth: '1500px' }
+              }
+            >
               <Row>{renderProducts}</Row>
             </Container>
           </section>

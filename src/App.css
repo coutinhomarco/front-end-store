@@ -1,12 +1,12 @@
 @media screen and (min-width: 375px) and (max-width: 700px) {
   .listedCategories {
-    font-size:1px;
+    font-size:10px;
     margin-right: 10px;
-    max-width: 150px;
+    max-width: 200px;
   }
   
   .listedCategories label{
-    max-width: 67%
+    max-width: 70%
   }
 
   #header-h1{
@@ -80,11 +80,11 @@ section {
   border-radius: 4px;
   color: rgb(30, 30, 30);
   font-weight: 400;
-  font-size:15px;
+  font-size:17px;
   height: min-content;
   margin-right: 10px;
   padding: 1%;
-  width: 270px;
+  width: 350x;
 }
 
 .card-body {

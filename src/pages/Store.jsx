@@ -143,7 +143,7 @@ export default class Store extends React.Component {
           return (
             <Col
               style={
-                { minWidth: '250px' }
+                { minWidth: '300px', maxWidth: '800px' }
               }
               xs={ 6 }
               sm={ 4 }

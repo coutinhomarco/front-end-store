@@ -98,7 +98,8 @@ section {
 }
 
 .card-img-top {
-  height: 184px;
+  max-height: 200px;
+  max-width: 248px;
 }
 
 .boxshadow {

@@ -14,9 +14,6 @@ Projeto feito em grupo durante curso de Desenvolvimento de Software da <a href="
 </ul>
 <hr>
 <h4>Confira remotamente:</h4> <a href="https://front-end-store-ten.vercel.app/" targe='_blank'>Clique aqui</a>
-<br>
-Digite um email válido (Exemplo: teste@teste.com)
-e uma senha com mais de 6 caracteres
 <hr>
 
 <h4>Teste na sua máquina!</h4>

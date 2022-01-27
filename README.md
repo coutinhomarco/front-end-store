@@ -11,10 +11,12 @@ Projeto feito em grupo durante curso de Desenvolvimento de Software da <a href="
   <li>Controle dos estados sem utilização de Redux e Hooks</li>
   <li>Componentes estilizados por React Boostrap e algum CSS a mão</li>
   <li>Utiliza API do Mercado Livre para desenvolvimento da loja</li>
-  <li>Algumas imagens são distorcidas por conta da irregulidade do retorno da API</li>
 </ul>
 <hr>
 <h4>Confira remotamente:</h4> <a href="https://front-end-store-ten.vercel.app/" targe='_blank'>Clique aqui</a>
+<br>
+Digite um email válido (Exemplo: teste@teste.com)
+e uma senha com mais de 6 caracteres
 <hr>
 
 <h4>Teste na sua máquina!</h4>

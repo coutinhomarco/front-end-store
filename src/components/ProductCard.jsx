@@ -31,18 +31,7 @@ function ProductCard({
         <Card.Img variant="top" src={ thumbnail } />
       </Link>
       <Card.Body>
-        <div style={ { height: '5rem', fontSize: '15px' } }>
-          <Card.Text className={ styles.productTitle }>{title}</Card.Text>
-        </div>
         <div className="shipping-price">
-          <Card.Title
-            style={
-              { fontSize: '16px' }
-            }
-          >
-            R$
-            {price}
-          </Card.Title>
           {
             shipping.free_shipping && (<Card.Img
               style={ { width: '65px', height: '45px' } }
@@ -53,17 +42,29 @@ function ProductCard({
             />)
           }
         </div>
-        <Button
-          style={
-            { width: '100%', height: '50px', fontSize: '14px' }
-          }
-          data-testid="product-add-to-cart"
-          variant="primary"
-          onClick={ () => handleAddToCartClick({
-            id, title, thumbnail, price, availableQuantity }) }
-        >
-          Adicionar ao carrinho
-        </Button>
+        <Card.Text className={ styles.productTitle }>{title}</Card.Text>
+
+        <div id="card-bottom">
+          <Card.Title
+            style={
+              { fontSize: '16px' }
+            }
+          >
+            R$
+            {price}
+          </Card.Title>
+          <Button
+            style={
+              { width: '100%', height: '50px', fontSize: '14px' }
+            }
+            data-testid="product-add-to-cart"
+            variant="primary"
+            onClick={ () => handleAddToCartClick({
+              id, title, thumbnail, price, availableQuantity }) }
+          >
+            Adicionar ao carrinho
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );

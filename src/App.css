@@ -93,13 +93,21 @@ section {
   justify-content: space-around;
 }
 
+.card-title{
+  text-align: center;
+}
+
+.card-bottom{
+  align-self: flex-end;
+}
+
 #product-card{
   width: 150px;
 }
 
 .card-img-top {
-  max-height: 200px;
-  max-width: 248px;
+  max-height: 250px;
+  /* max-width: 248px; */
 }
 
 .boxshadow {
